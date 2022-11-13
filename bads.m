@@ -1087,10 +1087,12 @@ while ~isFinished_flag
     % Store best points at the end of each iteration, or upon termination
     if DoPollStep_flag || isFinished_flag
         optimState.iterList.u(iter,:) = u;
+        optimState.iterList.x(iter,:) = origunits(u,optimState);
         optimState.iterList.yval(iter,1) = yval;
         optimState.iterList.fval(iter,1) = fval;
         optimState.iterList.fsd(iter,1) = fsd;
-        optimState.iterList.hyp{iter} = gpstruct.hyp;        
+        optimState.iterList.hyp{iter} = gpstruct.hyp;
+        optimState.iterList.funccount(iter, :) = optimState.funccount;
     end
     
     % Re-evaluate all noisy estimates at the end of iteration
