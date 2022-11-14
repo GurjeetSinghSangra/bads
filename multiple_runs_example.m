@@ -1,7 +1,7 @@
 
 function [status] = multiple_runs_example(D, runs, task_to_run, noisy, input_dir, output_path)
 
-    %Noisy Cliff
+    %Cliff
     cliff = @(x) sum(x.*x) + 1e4*sum(x < 0);
     % Rastrigin
     rastrigin = @(x) sum(x .^ 2 - 10 * cos(2*pi*x) + 10) ;
@@ -30,7 +30,7 @@ function [status] = multiple_runs_example(D, runs, task_to_run, noisy, input_dir
     end
     
     %Rosenbrocks
-    if any(contains(lower(task_to_run), "rosenbrock"))
+    if any(contains(lower(task_to_run), "rosenbrock")) || any(contains(lower(task_to_run), "all"))
         rosenbrocksconf = struct();
         rosenbrocksconf.task.name = "Rosenbrock";
         rosenbrocksconf.lb = ones(1, D) .* -20;   rosenbrocksconf.ub = ones(1, D) .* 20;
@@ -45,7 +45,7 @@ function [status] = multiple_runs_example(D, runs, task_to_run, noisy, input_dir
     end
     
     % Ackley
-    if any(contains(lower(task_to_run), "ackley"))
+    if any(contains(lower(task_to_run), "ackley")) || any(contains(lower(task_to_run), "all"))
         ackleyconf = struct();
         ackleyconf.task.name = 'Ackley';
         ackleyconf.lb = ones(1, D) .* -32;   ackleyconf.ub = ones(1, D) .* 32;
@@ -60,7 +60,7 @@ function [status] = multiple_runs_example(D, runs, task_to_run, noisy, input_dir
     end
     
     % Rastrigin 
-    if any(contains(lower(task_to_run), "rastrigin"))
+    if any(contains(lower(task_to_run), "rastrigin")) || any(contains(lower(task_to_run), "all"))
         rastriginconf = struct();
         rastriginconf.task.name = 'Rastrigin';
         rastriginconf.lb = ones(1, D) .* -20; rastriginconf.ub = ones(1, D) .* 20;
@@ -75,7 +75,7 @@ function [status] = multiple_runs_example(D, runs, task_to_run, noisy, input_dir
     end
     
     % Griewank
-    if any(contains(lower(task_to_run), "griewank"))
+    if any(contains(lower(task_to_run), "griewank")) || any(contains(lower(task_to_run), "all"))
         griewankconf = struct();
         griewankconf.task.name = 'Griewank';
         griewankconf.lb = ones(1, D) .* -600; griewankconf.ub = ones(1, D) .* 600;
@@ -90,7 +90,7 @@ function [status] = multiple_runs_example(D, runs, task_to_run, noisy, input_dir
     end
 
     % StyblinkyTang 
-    if any(contains(lower(task_to_run), "styblinskytang"))
+    if any(contains(lower(task_to_run), "styblinskytang")) || any(contains(lower(task_to_run), "all"))
         styblinskytangconf = struct();
         styblinskytangconf.task.name = 'Styblinskytang';
         styblinskytangconf.lb = ones(1, D) .* -5; styblinskytangconf.ub = ones(1, D) .* 5;
@@ -105,7 +105,7 @@ function [status] = multiple_runs_example(D, runs, task_to_run, noisy, input_dir
     end
     
     % Cliff
-    if any(contains(lower(task_to_run), "cliff"))
+    if any(contains(lower(task_to_run), "cliff")) || any(contains(lower(task_to_run), "all"))
         cliffconf = struct();
         cliffconf.task.name = 'Cliff';
         cliffconf.lb = ones(1, D) .* -20;   cliffconf.ub = ones(1, D) .* 20;
@@ -120,7 +120,7 @@ function [status] = multiple_runs_example(D, runs, task_to_run, noisy, input_dir
     end
     
     % Sphere
-    if any(contains(lower(task_to_run), "sphere"))
+    if any(contains(lower(task_to_run), "sphere")) || any(contains(lower(task_to_run), "all"))
         sphereconf = struct();
         sphereconf.task.name = 'Sphere';
         sphereconf.lb = ones(1, D) .* -20;   sphereconf.ub = ones(1, D) .* 20;
@@ -135,7 +135,7 @@ function [status] = multiple_runs_example(D, runs, task_to_run, noisy, input_dir
     end
     
     % StepFunction
-    if any(contains(lower(task_to_run), "stepfunction"))
+    if any(contains(lower(task_to_run), "stepfunction")) || any(contains(lower(task_to_run), "all"))
         stepconf = struct();
         stepconf.task.name = 'Stepfunction';
         stepconf.lb = ones(1, D) .* -20;   stepconf.ub = ones(1, D) .* 20;
