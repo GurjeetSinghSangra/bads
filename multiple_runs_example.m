@@ -163,24 +163,28 @@ function [status] = multiple_runs_example(D, runs, task_to_run, noisy, input_dir
         fprintf("\n")
         for i = 1:runs
             
-            x0 = X0(i, :);
-            rng(seed, 'twister')
-            [x,fval,exitflag,output, optimState] = bads(run.conf.f,x0,run.conf.lb,run.conf.ub, ...
-                                                            run.conf.plb,run.conf.pub);
-            out = struct();
-            out.x = x;
-            out.fval = fval;
-            out.fsd = optimState.fsd;
-            out.iterList.fval = optimState.iterList.fval;
-            out.iterList.fsd = optimState.iterList.fsd;
-            out.iterList.u = optimState.iterList.u;
-            out.iterList.x = optimState.iterList.x;
-            out.iterList.yval = optimState.iterList.yval;
-            out.iterList.hyp = optimState.iterList.hyp;
-            out.iterList.funccount = optimState.iterList.funccount;
-            out.funccount = optimState.funccount;
-            res = [res out];
-            seed = seed + 1;
+            if i <= length(X0)
+
+                x0 = X0(i, :);
+                rng(seed, 'twister')
+                fprintf("Iteration %i, seed %i \n", i, seed);
+                [x,fval,exitflag,output, optimState] = bads(run.conf.f,x0,run.conf.lb,run.conf.ub, ...
+                                                                run.conf.plb,run.conf.pub);
+                out = struct();
+                out.x = x;
+                out.fval = fval;
+                out.fsd = optimState.fsd;
+                out.iterList.fval = optimState.iterList.fval;
+                out.iterList.fsd = optimState.iterList.fsd;
+                out.iterList.u = optimState.iterList.u;
+                out.iterList.x = optimState.iterList.x;
+                out.iterList.yval = optimState.iterList.yval;
+                out.iterList.hyp = optimState.iterList.hyp;
+                out.iterList.funccount = optimState.iterList.funccount;
+                out.funccount = optimState.funccount;
+                res = [res out];
+                seed = seed + 1;
+            end
         end
         runs_res = struct();
         runs_res.conf = run.conf;
